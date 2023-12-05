@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 from pathlib import Path
 from collections import namedtuple
@@ -63,6 +64,6 @@ if __name__ == "__main__":
     for game in games:
         if game.check_possible(12, 13, 14):
             score += game.index
-    print(f"Score for part 1: {score}")
+    print(f"Result for part 1: {score}")
     # part 2
-    print(f"Score for part 2: {sum(game.get_power() for game in games)}")
+    print(f"Result for part 2: {sum(game.get_power() for game in games)}")

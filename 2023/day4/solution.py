@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 from functools import cached_property
 from pathlib import Path
@@ -47,7 +48,7 @@ if __name__ == "__main__":
     pargs = parser.parse_args()
     # part 1
     cards = load_txt(pargs.filepath)
-    print(f"Score for part 1: {sum(card.get_score() for card in cards.values())}")
+    print(f"Result for part 1: {sum(card.get_score() for card in cards.values())}")
 
     # part 2 (probably need to dfs this)
     card_count = len(cards)
@@ -71,4 +72,4 @@ if __name__ == "__main__":
         results[index] = count
         return count
 
-    print(f"Score for part 2: {sum(dfs(i) for i in card_indices)}")
+    print(f"Result for part 2: {sum(dfs(i) for i in card_indices)}")

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 from pathlib import Path
 
@@ -95,6 +96,6 @@ if __name__ == "__main__":
     pargs = parser.parse_args()
     # part 1
     matrix = load_txt(pargs.filepath)
-    print(f"Score for part 1: {find_parts(matrix)}")
+    print(f"Result for part 1: {find_parts(matrix)}")
     # part 2    
-    print(f"Score for part 2: {find_gear_ratio(matrix)}")
+    print(f"Result for part 2: {find_gear_ratio(matrix)}")
