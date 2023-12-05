@@ -1,3 +1,4 @@
+import argparse
 from pathlib import Path
 from collections import namedtuple
 
@@ -44,18 +45,20 @@ def parse_line(line: str) -> Game:
     return Game(index, total_draws)
 
 
-def load_txt() -> list[int]:
+def load_txt(filepath) -> list[int]:
     games = []
-    with open(FILEPATH, mode='r') as file:
+    with open(filepath, mode='r') as file:
         for line in file.readlines():
             games.append(parse_line(line))
     return games
 
 
 if __name__ == "__main__":
-    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--filepath', type=lambda path: str(Path(path).absolute()), default=FILEPATH)
+    pargs = parser.parse_args()
     # part 1
-    games = load_txt()
+    games = load_txt(pargs.filepath)
     score = 0
     for game in games:
         if game.check_possible(12, 13, 14):

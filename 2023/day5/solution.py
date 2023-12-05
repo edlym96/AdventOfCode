@@ -1,3 +1,4 @@
+import argparse
 from collections import namedtuple
 import bisect
 from pathlib import Path
@@ -75,8 +76,8 @@ def parse_seeds_part2(seed_line):
         recs.append(RangeRecord(start, rng))
     return recs
 
-def load_txt():
-    with open(FILEPATH, mode='r') as file:
+def load_txt(filepath):
+    with open(filepath, mode='r') as file:
         
         # parse seeds
         seed_line = file.readline()
@@ -92,8 +93,8 @@ def load_txt():
         # part 1
         return seeds, mappings
 
-def load_txt_part2():
-    with open(FILEPATH, mode='r') as file:
+def load_txt_part2(filepath):
+    with open(filepath, mode='r') as file:
         
         # parse seeds
         seed_line = file.readline()
@@ -127,15 +128,17 @@ def parse_mapping(fstream):
 
 
 if __name__ == "__main__":
-    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--filepath', type=lambda path: str(Path(path).absolute()), default=FILEPATH)
+    pargs = parser.parse_args()
     # part 1
-    seeds, mappings = load_txt()
+    seeds, mappings = load_txt(pargs.filepath)
     translation_mapping = TranslationMapping(mappings)
     locations = [translation_mapping.map_seed(seed) for seed in seeds]
     print(f"Min location for part 1: {min(locations)}")
 
     # part 2
-    seeds, mappings = load_txt_part2()
+    seeds, mappings = load_txt_part2(pargs.filepath)
     translation_mapping = TranslationMapping(mappings)
     locations = []
     for seed_rec in seeds:

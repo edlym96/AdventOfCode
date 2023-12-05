@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+import argparse
 from pathlib import Path
 
 FILEPATH = str(Path(__file__).parent / 'input.txt')
@@ -78,9 +80,9 @@ def find_last_part2(line:str):
         return str_val
 
 
-def load_txt() -> list[int]:
+def load_txt(filepath) -> list[int]:
     digits = []
-    with open(FILEPATH, mode='r') as file:
+    with open(filepath, mode='r') as file:
         for line in file.readlines():
             line = line.strip().rstrip()
             first, last = line[find_first(line)], line[find_last(line)]
@@ -88,22 +90,23 @@ def load_txt() -> list[int]:
             digits.append(int(total))
     return digits
             
-def load_txt_part2() -> list[int]:
+def load_txt_part2(filepath) -> list[int]:
     digits = []
-    with open(FILEPATH, mode='r') as file:
+    with open(filepath, mode='r') as file:
         for line in file.readlines():
             line = line.strip().rstrip()
             first, last = find_first_part2(line), find_last_part2(line)
-            print(first, last)
             total = first + last
             digits.append(int(total))
     return digits
 
 if __name__ == "__main__":
-    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--filepath', type=lambda path: str(Path(path).absolute()), default=FILEPATH)
+    pargs = parser.parse_args()
     # part 1
-    values = load_txt()
-    print(f"Score for part 1: {sum(values)}")
+    values = load_txt(pargs.filepath)
+    print(f"Result for part 1: {sum(values)}")
     # part 2
-    values = load_txt_part2()
-    print(f"Score for part 2: {sum(values)}")
+    values = load_txt_part2(pargs.filepath)
+    print(f"Result for part 2: {sum(values)}")

@@ -1,3 +1,4 @@
+import argparse
 from functools import cached_property
 from pathlib import Path
 
@@ -22,9 +23,9 @@ class Card:
         won = len(self.available & self.winning)
         return [self.index + i for i in range(1, won+1)]
 
-def load_txt() -> list[Card]:
+def load_txt(filepath) -> list[Card]:
     cards = {}
-    with open(FILEPATH, mode='r') as file:
+    with open(filepath, mode='r') as file:
         for line in file.readlines():
             first, second = line.split('|')
             # filter out "Card"
@@ -41,9 +42,11 @@ def load_txt() -> list[Card]:
             
 
 if __name__ == "__main__":
-    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--filepath', type=lambda path: str(Path(path).absolute()), default=FILEPATH)
+    pargs = parser.parse_args()
     # part 1
-    cards = load_txt()
+    cards = load_txt(pargs.filepath)
     print(f"Score for part 1: {sum(card.get_score() for card in cards.values())}")
 
     # part 2 (probably need to dfs this)
