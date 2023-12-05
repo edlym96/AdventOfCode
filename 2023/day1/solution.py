@@ -5,6 +5,7 @@ from pathlib import Path
 FILEPATH = str(Path(__file__).parent / 'input.txt')
 
 DIGIT_MAP = {
+    'zero': "0",
     'one': "1",
     'two': "2",
     'three': "3",
