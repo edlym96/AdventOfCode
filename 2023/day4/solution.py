@@ -16,6 +16,7 @@ class Card:
             return 0
         return 2**(won - 1)
 
+    # Part 2 get won cards
     @cached_property
     def won_cards(self):
         won = len(self.available & self.winning)
@@ -44,7 +45,6 @@ if __name__ == "__main__":
     # part 1
     cards = load_txt()
     print(f"Score for part 1: {sum(card.get_score() for card in cards.values())}")
-    # print(f"Min location for part 1: {min(locations)}")
 
     # part 2 (probably need to dfs this)
     card_count = len(cards)
