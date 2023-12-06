@@ -40,7 +40,7 @@ def calculate_distance(speed, time):
 
 def find_ways_to_win_race(race: Race):
     low = 0
-    # The distance profile is mirrored, so weo nly need to search from the middle
+    # The distance profile is mirrored, so we only need to search from the middle
     high = race.time // 2
 
     # Binary search to find the lowest index where the distance travelled would break the record
